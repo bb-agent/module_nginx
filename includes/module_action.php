@@ -68,7 +68,7 @@ if($service == $mod_name) {
         }
 		
 		if ($mod_nginx_fpm == "php7") {
-			$exec = "cp vhost-php7.conf vhost/FruityWiFi-www";
+			$exec = "cp vhost-php7.conf vhost/BlackBlulb-www";
 			exec_blackbulb($exec);
 			
 			if (!file_exists("/etc/php/7.0/fpm/pool.d/80.conf") or !file_exists("/etc/php/7.0/fpm/pool.d/443.conf")) {
@@ -82,7 +82,7 @@ if($service == $mod_name) {
 				exec_blackbulb($exec);
 			}
 		} else {
-			$exec = "cp vhost-php5.conf vhost/FruityWiFi-www";
+			$exec = "cp vhost-php5.conf vhost/BlackBlulb-www";
 			exec_blackbulb($exec);
 			
 			if (!file_exists("/etc/php5/fpm/pool.d/80.conf") or !file_exists("/etc/php5/fpm/pool.d/443.conf")) {
