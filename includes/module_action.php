@@ -46,7 +46,7 @@ $php_fpm = $_GET["php_fpm"];
 if ($php_fpm == "php7" or $php_fpm == "php5") {
     $ss_mode = $service;
     $exec = "/bin/sed -i 's/mod_nginx_fpm.*/mod_nginx_fpm = \\\"".$php_fpm."\\\";/g' ../_info_.php";
-    exec_fruitywifi($exec);
+    exec_blackbulb($exec);
 	
 	header("Location: ../index.php");
     exit;
@@ -61,44 +61,44 @@ if($service == $mod_name) {
         // COPY LOG
         if ( 0 < filesize( $mod_logs ) ) {
             $exec = "cp $mod_logs $mod_logs_history/".gmdate("Ymd-H-i-s").".log";
-            exec_fruitywifi($exec);
+            exec_blackbulb($exec);
             
             $exec = "echo '' > $mod_logs";
-            exec_fruitywifi($exec);
+            exec_blackbulb($exec);
         }
 		
 		if ($mod_nginx_fpm == "php7") {
 			$exec = "cp vhost-php7.conf vhost/FruityWiFi-www";
-			exec_fruitywifi($exec);
+			exec_blackbulb($exec);
 			
 			if (!file_exists("/etc/php/7.0/fpm/pool.d/80.conf") or !file_exists("/etc/php/7.0/fpm/pool.d/443.conf")) {
 				$exec = "cp php7-fpm/80.conf /etc/php/7.0/fpm/pool.d/";
-				exec_fruitywifi($exec);
+				exec_blackbulb($exec);
 				$exec = "cp php7-fpm/443.conf /etc/php/7.0/fpm/pool.d/";
-				exec_fruitywifi($exec);
+				exec_blackbulb($exec);
 				$exec = "$php7_fpm -y /etc/php/7.0/fpm/pool.d/80.conf";
-				exec_fruitywifi($exec);
+				exec_blackbulb($exec);
 				$exec = "$php7_fpm -y /etc/php/7.0/fpm/pool.d/443.conf";
-				exec_fruitywifi($exec);
+				exec_blackbulb($exec);
 			}
 		} else {
 			$exec = "cp vhost-php5.conf vhost/FruityWiFi-www";
-			exec_fruitywifi($exec);
+			exec_blackbulb($exec);
 			
 			if (!file_exists("/etc/php5/fpm/pool.d/80.conf") or !file_exists("/etc/php5/fpm/pool.d/443.conf")) {
 				$exec = "cp php5-fpm/80.conf /etc/php5/fpm/pool.d/";
-				exec_fruitywifi($exec);
+				exec_blackbulb($exec);
 				$exec = "cp php5-fpm/443.conf /etc/php5/fpm/pool.d/";
-				exec_fruitywifi($exec);
+				exec_blackbulb($exec);
 				$exec = "$php5_fpm -y /etc/php5/fpm/pool.d/80.conf";
-				exec_fruitywifi($exec);
+				exec_blackbulb($exec);
 				$exec = "$php5_fpm -y /etc/php5/fpm/pool.d/443.conf";
-				exec_fruitywifi($exec);
+				exec_blackbulb($exec);
 			}
 		}
 		
-		$exec = "$bin_nginx -c /usr/share/fruitywifi/www/modules/nginx/includes/nginx.conf";
-        exec_fruitywifi($exec);
+		$exec = "$bin_nginx -c /usr/share/blackbulb/www/modules/nginx/includes/nginx.conf";
+        exec_blackbulb($exec);
 		
     } else if($action == "stop") {
 	
@@ -107,15 +107,15 @@ if($service == $mod_name) {
 		exec($exec,$output);
 		
 		$exec = "kill " . $output[0];
-		exec_fruitywifi($exec);
+		exec_blackbulb($exec);
 	
 		// COPY LOG
         if ( 0 < filesize( $mod_logs ) ) {
             $exec = "cp $mod_logs $mod_logs_history/".gmdate("Ymd-H-i-s").".log";
-            exec_fruitywifi($exec);
+            exec_blackbulb($exec);
             
             $exec = "echo '' > $mod_logs";
-            exec_fruitywifi($exec);
+            exec_blackbulb($exec);
         }
 	
     }
@@ -125,10 +125,10 @@ if($service == $mod_name) {
 if ($install == "install_$mod_name") {
 
     $exec = "chmod 755 install.sh";
-    exec_fruitywifi($exec);
+    exec_blackbulb($exec);
     
     $exec = "$bin_sudo ./install.sh > $log_path/install.txt &";
-    exec_fruitywifi($exec);
+    exec_blackbulb($exec);
 
     header("Location: ../../install.php?module=$mod_name");
     exit;

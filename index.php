@@ -20,7 +20,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>FruityWifi</title>
+<title>BlackBulb</title>
 <script src="../js/jquery.js"></script>
 <script src="../js/jquery-ui.js"></script>
 <link rel="stylesheet" href="../css/jquery-ui.css" />
@@ -67,14 +67,14 @@ $service = $_POST["service"];
 // DELETE LOG
 if ($logfile != "" and $action == "delete") {
     $exec = "rm ".$mod_logs_history.$logfile.".log";
-    exec_fruitywifi($exec);
+    exec_blackbulb($exec);
 }
 
 // SET MODE
 if ($_POST["change_mode"] == "1") {
     $ss_mode = $service;
     $exec = "/bin/sed -i 's/ss_mode.*/ss_mode = \\\"".$ss_mode."\\\";/g' includes/options_config.php";
-    exec_fruitywifi($exec);
+    exec_blackbulb($exec);
 }
 
 include "includes/options_config.php";
@@ -87,7 +87,7 @@ include "includes/options_config.php";
     &nbsp;&nbsp;version <?=$mod_version?><br>
     <?
     $exec = $mod_isup;
-    $ismoduleup = exec_fruitywifi($exec);
+    $ismoduleup = exec_blackbulb($exec);
     if ($ismoduleup[0] != "") {
         echo "&nbsp;&nbsp;&nbsp; $mod_alias  <font color=\"lime\"><b>enabled</b></font>.&nbsp; | <a href=\"includes/module_action.php?service=$mod_name&action=stop&page=module\"><b>stop</b></a>";
     } else { 
